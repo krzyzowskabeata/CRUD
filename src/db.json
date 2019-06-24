@@ -1,24 +1,69 @@
 {
   "users": [
     {
-      "guid": "bkrzyzowska",
+      "guid": "1bkrzyzowska",
       "name": "Beata K",
       "id": "1"
     },
     {
-      "guid": "Beata K",
+      "guid": "2Beata K",
       "name": "ola",
-      "id": "6"
+      "id": "2"
     },
     {
       "guid": "ddobry",
       "name": "Dominik D",
-      "id": "2"
+      "id": "3"
     },
     {
       "guid": "ddobry2",
       "name": "Dominik D",
-      "id": "3"
+      "id": "4"
+    },
+    {
+      "guid": "3bkrzyzowska2",
+      "name": "Beata K",
+      "id": "5"
+    },
+    {
+      "guid": "4Beata K",
+      "name": "ola2",
+      "id": "6"
+    },
+    {
+      "guid": "5Beata K",
+      "name": "ola5",
+      "id": "7"
+    },
+    {
+      "guid": "3bkrzyzowska2",
+      "name": "Beata K",
+      "id": "8"
+    },
+    {
+      "guid": "4Beata K",
+      "name": "ola2",
+      "id": "9"
+    },
+    {
+      "guid": "5Beata K",
+      "name": "ola5",
+      "id": "10"
+    },
+    {
+      "guid": "3bkrzyzowska2",
+      "name": "Beata K",
+      "id": "11"
+    },
+    {
+      "guid": "4Beata K",
+      "name": "ola2",
+      "id": "12"
+    },
+    {
+      "guid": "5Beata K",
+      "name": "ola5",
+      "id": "13"
     }
   ],
   "groups": [
@@ -89,17 +134,17 @@
     {
       "userGuid": "ddobry",
       "groupID": "0001",
-      "id": "tw6FGmX"
+      "id": "96aptgI"
     },
     {
-      "userGuid": "ddobry",
-      "groupID": "0002",
-      "id": "kGxyWQO"
+      "userGuid": "2Beata K",
+      "groupID": "0001",
+      "id": "6EeTY7H"
     },
     {
-      "userGuid": "ddobry",
-      "groupID": "0003",
-      "id": "2ROAD9p"
+      "userGuid": "1bkrzyzowska",
+      "groupID": "0001",
+      "id": "K5K1Wm5"
     }
   ],
   "groupsPermissions": [

@@ -8,14 +8,16 @@ class Users extends Component {
         url: "http://localhost:3000",
         users: [],
         usersGroups: [],
-        currGroups: [],
         currUsers: [],
+        currGroups: [],
         editUser: [],
         guidValid: true,
+        loginInit: "",
         loginName: "",
         showTable: false,
-        fromIndex: 0,
-        toIndex: 6
+        page: 1,
+        startNum: 1,
+        nextStop: false
     };
 
     handleManage = (e) => {
@@ -34,7 +36,8 @@ class Users extends Component {
         if(e.target.name === "editBtn") {
             this.setState({
                 editUser: [],
-                editUserGroups: []
+                currUsers: [],
+                currGroups: [],
             });
         }
 
@@ -42,7 +45,8 @@ class Users extends Component {
             this.setState({
                 // guidValid: true,
                 editUser: [],
-                editUserGroups: []
+                currUsers: [],
+                currGroups: [],
             });
         }
     };
@@ -50,6 +54,7 @@ class Users extends Component {
     handleChange = (e) => {
         this.setState({
             guidValid: true,
+            loginInit: e.target.value,
             loginName: e.target.value
         });
     };
@@ -62,36 +67,43 @@ class Users extends Component {
             usersGroups: [],
             currGroups: [],
             currUsers: [],
+            loginInit: "",
             showTable: false,
-            fromIndex: 0,
-            toIndex: 6,
+            page: 1,
+            startNum: 1,
+            nextStop: false
         });
 
+        this.handleUsers();
+    };
+
+    handleUsers = () => {
+
         // users.name
-        fetch(`${this.state.url}/users?name=${this.state.loginName}`).then(el => el.json())
+        fetch(`${this.state.url}/users?q=${this.state.loginName}&_page=${this.state.page}&_limit=5`).then(el => el.json())
             .then(users => {
-                this.setState({
-                    users
-                });
-
-                //users.guid
-                fetch(`${this.state.url}/users?guid=${this.state.loginName}`).then(el => el.json())
-                    .then(users => {
-                        this.setState({
-                            users: [...this.state.users,...users]
-                        });
-                        this.handleUsersGroups();
-                    })
-                    .catch(err => {
-                        console.log(err);
+                if(users.length) {
+                    this.setState({
+                        users,
+                        usersGroups: [],
+                        currGroups: [],
+                        currUsers: [],
+                        nextStop: false
                     });
-
-                this.setState({
-                    loginName: ""
-                });
+                    this.handleUsersGroups();
+                } else {
+                    this.setState({
+                        usersGroups: [],
+                        currGroups: [],
+                        currUsers: [],
+                        page: this.state.page - 1,
+                        startNum: this.state.startNum - 5,
+                        nextStop: true
+                    });
+                }
             })
             .catch(err => {
-                console.log(err);
+            console.log(err);
             });
     };
 
@@ -178,19 +190,25 @@ class Users extends Component {
     handlePage = (e) => {
         e.preventDefault();
 
-        if(e.target.name === "prev" && this.state.fromIndex >= 6) {
+        if(e.target.name === "prev" && this.state.page > 1) {
             this.setState({
-                fromIndex: this.state.fromIndex - 6,
-                toIndex: this.state.toIndex - 6,
+                page: this.state.page - 1,
+                startNum: this.state.startNum - 5
+            }, function() {
+                this.handleUsers();
             });
         }
 
-        if(e.target.name === "next" && this.state.toIndex < this.state.currUsers.length) {
+        if(e.target.name === "next" ) {
             this.setState({
-                fromIndex: this.state.fromIndex + 6,
-                toIndex: this.state.toIndex + 6,
+                page: this.state.page + 1,
+                startNum: this.state.startNum + 5
+            }, function() {
+                this.handleUsers();
             });
         }
+
+        this.handleUsers();
     };
 
     handleSelect = (e) => {
@@ -324,18 +342,18 @@ class Users extends Component {
                                 <label>
                                     User (name or login)
                                     <br/>
-                                    <input type="text" name="guid" value={this.state.loginName} onChange={this.handleChange}
+                                    <input type="text" name="guid" value={this.state.loginInit} onChange={this.handleChange}
                                            className={this.state.guidValid ? "" : "not_valid"} />
                                 </label>
                                 <button type="submit" className="sub_btn">Search</button>
                             </form>
-                            <div className={this.state.currUsers.length > 6? "" : "hidden"}>
+                            <div className={this.state.currUsers.length ? "" : "hidden"}>
                                 <button name="prev" onClick={this.handlePage}
-                                        className={this.state.currUsers.length > 6 ? "prev_next_btn active" : "prev_next_btn"}>
+                                        className={this.state.page > 1 ? "prev_next_btn active" : "prev_next_btn"}>
                                     Prev
                                 </button>
                                 <button name="next" onClick={this.handlePage}
-                                        className={this.state.currUsers.length > 6 ? "prev_next_btn active" : "prev_next_btn"}>
+                                        className={!this.state.nextStop ? "prev_next_btn active" : "prev_next_btn"}>
                                     Next
                                 </button>
                             </div>
@@ -348,26 +366,24 @@ class Users extends Component {
                                         <th>Group</th>
                                     </tr>
                                     {this.state.currUsers.map((e, index) => {
-                                        if(index >= this.state.fromIndex && index < this.state.toIndex) {
-                                            return (
-                                                <tr className="row" key={e.id} id={e.id} onClick={this.handleSelect}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{e.guid}</td>
-                                                    <td>{e.name}</td>
-                                                    <td>
-                                                        {e.groups.map((el, index) => {
-                                                            return (
-                                                                <span className="tooltip" key={index}
-                                                                      id={el.description}
-                                                                      onMouseOver={this.tipsOn} onMouseLeave={this.tipsOff}>
+                                        return (
+                                            <tr className="row" key={e.id} id={e.id} onClick={this.handleSelect}>
+                                                <td>{index + this.state.startNum}</td>
+                                                <td>{e.guid}</td>
+                                                <td>{e.name}</td>
+                                                <td>
+                                                    {e.groups.map((el, index) => {
+                                                        return (
+                                                            <span className="tooltip" key={index}
+                                                                  id={el.description}
+                                                                  onMouseOver={this.tipsOn} onMouseLeave={this.tipsOff}>
                                                                     {el.name + " "}
                                                                 </span>
-                                                            );
-                                                        })}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        }
+                                                        );
+                                                    })}
+                                                </td>
+                                            </tr>
+                                        )
                                     })}
                                 </tbody>
                             </table>
