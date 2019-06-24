@@ -1,0 +1,19 @@
+@mixin flex-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  @include flex-align;
+  color: $base-color;
+  margin-top: 50px;
+
+  div {
+    @include flex-align;
+
+    h4 {
+      margin-left: 20px;
+    }
+  }
+}

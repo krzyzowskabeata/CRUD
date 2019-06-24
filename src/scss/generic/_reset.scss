@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'noah';
+  src: url('./../../fonts/Noah-Regular.woff2') format('woff2'),
+  url('./../../fonts/Noah-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'noah';
+  src: url('./../../fonts/Noah-Bold.woff2') format('woff2'),
+  url('./../../fonts/Noah-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: noah, sans-serif;
+
+  &:focus {
+    outline: 0;
+  }
+}

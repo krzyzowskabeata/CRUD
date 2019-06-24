@@ -1,0 +1,52 @@
+@mixin flex-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin custom-tabs {
+  border-top: 2px solid $base-color;
+  border-left: 2px solid $base-color;
+  border-right: 2px solid $base-color;
+  border-radius: 25px 25px 0 0;
+}
+
+.main {
+  color: #fff;
+  font-weight: 700;
+  position: absolute;
+  top: 125px;
+  bottom: 50px;
+  width: 100%;
+  background-color: $base-color;
+  border-radius: 25px;
+}
+
+.navigation {
+  @include flex-align;
+  background-color: #fff;
+
+  a {
+    color: $base-color;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    line-height: 50px;
+
+    div {
+      @include custom-tabs;
+      height: 50px;
+      width: 330px;
+      background-color: #fff;
+      //margin-right: 10px;
+    }
+
+    &.active_nav {
+      color: #fff;
+
+      div {
+        background-color: $base-color;
+      }
+    }
+  }
+}

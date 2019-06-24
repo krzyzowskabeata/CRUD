@@ -1,0 +1,115 @@
+@mixin custom-btn {
+  color: #fff;
+  font-weight: 700;
+  border: transparent;
+  padding: 5px 10px;
+  transition: background-color .5s ease-out;
+}
+
+@mixin  custom-hover {
+  color: $base-color;
+  background-color: #fff;
+}
+
+.add_btn {
+  @include custom-btn;
+  background-color: $base-color;
+  border-radius: 50px;
+  margin-right: 10px;
+  transition: background-color .2s ease-out;
+
+  &.add_active {
+    background-color: lighten($add-color, 10%);
+  }
+
+  &:hover {
+    @include custom-hover;
+  }
+}
+
+.edit_btn {
+  @include custom-btn;
+  background-color: $base-color;
+  border-radius: 50px;
+  margin-right: 10px;
+  transition: background-color .2s ease-out;
+
+  &.edit_active {
+    background-color: lighten($edit-color, 10%);
+  }
+
+  &:hover {
+    @include custom-hover;
+  }
+}
+
+.search_btn {
+  @include custom-btn;
+  background-color: $base-color;
+  border-radius: 50px;
+  margin-right: 10px;
+  transition: background-color .2s ease-out;
+
+  &.search_active {
+    background-color: lighten($base-color, 10%);
+  }
+
+  &:hover {
+    @include custom-hover;
+  }
+}
+
+.sub_btn, .edit_del_btn {
+  @include custom-btn;
+  background-color: lighten($base-color, 10%);
+  border-radius: 0 50px 50px 0;
+  transition: background-color .2s ease-out;
+  margin: 10px 0;
+
+  &:hover {
+    @include custom-hover;
+  }
+}
+
+.edit_del_btn {
+
+  &:first-of-type {
+    border-radius: 50px 0 0 50px;
+
+    &:hover {
+      color: #fff;
+      background-color: $edit-color;
+    }
+  }
+
+  &:last-of-type {
+    border-radius: 0 50px 50px 0;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: darken($warn-color, 5%);
+  }
+}
+
+.prev_next_btn {
+  @include custom-btn;
+  background-color: lighten($base-color, 10%);
+  transition: background-color .2s ease-out;
+  margin-bottom: 5px;
+
+  &:first-of-type {
+    border-radius: 50px 0 0 50px;
+    margin-left: 25px;
+  }
+
+  &:Last-of-type {
+    border-radius: 0 50px 50px 0;
+  }
+
+  &.active {
+    &:hover {
+      @include custom-hover;
+    }
+  }
+}
