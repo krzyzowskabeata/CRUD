@@ -11,7 +11,6 @@ class Users extends Component {
         currGroups: [],
         currUsers: [],
         editUser: [],
-        editUserGroups: [],
         guidValid: true,
         loginName: "",
         showTable: false,
@@ -72,10 +71,10 @@ class Users extends Component {
         fetch(`${this.state.url}/users?name=${this.state.loginName}`).then(el => el.json())
             .then(users => {
                 this.setState({
-                    users: users
+                    users
                 });
 
-                // users.guid
+                //users.guid
                 fetch(`${this.state.url}/users?guid=${this.state.loginName}`).then(el => el.json())
                     .then(users => {
                         this.setState({
@@ -106,6 +105,7 @@ class Users extends Component {
                         this.setState({
                             usersGroups: [...this.state.usersGroups,...usersGroups]
                         });
+
                         this.handleGroups();
                     })
                     .catch(err => {
@@ -146,11 +146,13 @@ class Users extends Component {
 
             this.state.usersGroups.forEach(el => {
                 if(e.guid === el.userGuid) {
+
                     this.state.currGroups.forEach(elm => {
                         if(el.groupID === elm.id) {
                             const groupEl = {
                                 name: elm.name,
                                 description: elm.description,
+                                relId: el.id
                             };
                             currUsersGroups.push(groupEl);
                         }
@@ -194,13 +196,10 @@ class Users extends Component {
     handleSelect = (e) => {
         const userId = e.target.parentElement.getAttribute("id");
 
-        const editUser = this.state.users.filter(e => e.id === userId);
-        const editUserGroups = this.state.currGroups.filter(e => e.userGuid === editUser.guid);
+        const editUser = this.state.currUsers.filter(e => e.id === userId);
 
         this.setState({
             editUser,
-            editUserGroups,
-            // editGroupId: this.state.usersGroups,
             editBtn: true,
             currUsers: []
         });
@@ -288,9 +287,7 @@ class Users extends Component {
                                     className={this.state.editBtn ? "edit_btn edit_active" : "edit_btn"}>
                                 Edit user
                             </button>
-                            <UsersEdit editUser={this.state.editUser}
-                                       editUserGroups={this.state.editUserGroups}
-                                       editGroupId={this.state.usersGroups} />
+                            <UsersEdit editUser={this.state.editUser} />
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,11 @@
       "id": "1"
     },
     {
+      "guid": "Beata K",
+      "name": "ola",
+      "id": "6"
+    },
+    {
       "guid": "ddobry",
       "name": "Dominik D",
       "id": "2"
@@ -57,29 +62,44 @@
   ],
   "usersGroups": [
     {
-      "userGuid": "ddobry",
-      "groupID": "0001",
-      "id": "2"
-    },
-    {
-      "userGuid": "ddobry",
-      "groupID": "0002",
-      "id": "3"
-    },
-    {
-      "userGuid": "bkrzyzowska",
-      "groupID": "0002",
-      "id": "UD_fem-"
-    },
-    {
-      "userGuid": "bkrzyzowska",
-      "groupID": "0001",
-      "id": "MpydJMi"
-    },
-    {
-      "userGuid": "bkrzyzowska",
+      "userGuid": "Beata K",
       "groupID": "0003",
-      "id": "l3cKFaa"
+      "id": "_7OupH0"
+    },
+    {
+      "userGuid": "bkrzyzowska",
+      "groupID": "0001",
+      "id": "_BJpilG"
+    },
+    {
+      "userGuid": "ddobry2",
+      "groupID": "0001",
+      "id": "aWi7C6G"
+    },
+    {
+      "userGuid": "ddobry2",
+      "groupID": "0002",
+      "id": "BJsZzRv"
+    },
+    {
+      "userGuid": "ddobry2",
+      "groupID": "0003",
+      "id": "htCtQNC"
+    },
+    {
+      "userGuid": "ddobry",
+      "groupID": "0001",
+      "id": "tw6FGmX"
+    },
+    {
+      "userGuid": "ddobry",
+      "groupID": "0002",
+      "id": "kGxyWQO"
+    },
+    {
+      "userGuid": "ddobry",
+      "groupID": "0003",
+      "id": "2ROAD9p"
     }
   ],
   "groupsPermissions": [

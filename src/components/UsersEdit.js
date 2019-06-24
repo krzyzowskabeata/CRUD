@@ -5,8 +5,6 @@ class UsersEdit extends Component {
     state = {
         url: "http://localhost:3000",
         editUser: this.props.editUser,
-        editGroupId: this.props.editGroupId,
-        editUserGroups: this.props.editUserGroups,
         groups: [],
         guid: this.props.editUser[0].guid,
         name: this.props.editUser[0].name,
@@ -35,8 +33,9 @@ class UsersEdit extends Component {
         this.setState({
             [e.target.name]: e.target.value,
             valid: false,
+            validGuid: true,
             validName: true,
-            validDesc: true
+            validCheckboxes: true,
         });
     };
 
@@ -118,10 +117,13 @@ class UsersEdit extends Component {
                     console.log(err);
                 });
 
-            if(this.state.editGroupId.length) {
+            if(this.state.editUser[0].groups.length) {
+
                 // delete user's groups
-                this.state.editGroupId.forEach(e => {
-                    fetch(`${this.state.url}/usersGroups/${e.id}`, {
+                this.state.editUser[0].groups.forEach(e => {
+                    const idGroupDelete = e.relId;
+
+                    fetch(`${this.state.url}/usersGroups/${idGroupDelete}`, {
                         method: 'DELETE'
                     }).then(users => {
                         this.setState({
@@ -152,12 +154,16 @@ class UsersEdit extends Component {
                 .catch(err => console.log(err));
 
             // usersGroups - delete previous
-            if(this.state.editGroupId.length) {
-                this.state.editGroupId.forEach(e => {
-                    fetch(`${this.state.url}/usersGroups/${e.id}`, {
+            if(this.state.editUser[0].groups.length) {
+
+                // delete user's groups
+                this.state.editUser[0].groups.forEach(e => {
+                    const idGroupDelete = e.relId;
+
+                    fetch(`${this.state.url}/usersGroups/${idGroupDelete}`, {
                         method: 'DELETE'
                     }).then(res => res.json())
-                        .catch(err => console.log(err));
+                    .catch(err => console.log(err));
                 });
             }
 
@@ -207,7 +213,7 @@ class UsersEdit extends Component {
                 </label>
                 <div className={this.state.validCheckboxes ? "checkboxes" : "checkboxes not_valid_checkboxes"}>
                     {this.state.groups.map(e => {
-                        if(this.state.editUserGroups.filter(el => el.name === e.name).length) {
+                        if(this.state.editUser[0].groups.filter(el => el.name === e.name).length) {
                             return (
                                 <label key={e.id} className="checked">
                                     <input type="checkbox" name={e.name} onClick={this.handleChoice} />
