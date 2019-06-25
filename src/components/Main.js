@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 
 class Main extends Component {
 
@@ -9,13 +9,11 @@ class Main extends Component {
         savedUser: "",
         login: "",
         password: "",
-        isChecked: false,
         greeting: "",
         placeholderLogin: "Login",
         placeholderPassword: "Password",
         validLogin: true,
         validPassword: true,
-        redirect: ""
     };
 
     componentDidMount() {
@@ -31,14 +29,9 @@ class Main extends Component {
 
     handleChange = (e) => {
         this.setState({
-            [e.target.id]: e.target.value
-        });
-    };
-
-    toggleChange = () => {
-        this.setState({
-            isChecked: !this.state.isChecked,
-
+            [e.target.id]: e.target.value,
+            validLogin: true,
+            validPassword: true
         });
     };
 
@@ -84,18 +77,14 @@ class Main extends Component {
                 placeholderPassword: "Faulty password",
                 validPassword: false
             });
-        }
-
-        if(this.state.admins.length !== 0 && this.state.isChecked) {
+        } else {
             localStorage.setItem("savedUser", this.state.admins[0].name);
 
             this.setState({
-                savedUser: this.state.admins[0].name
+                savedUser: this.state.admins[0].name,
+                greeting: this.state.admins[0].name
             });
         }
-        this.setState({
-            greeting: this.state.admins[0].name
-        });
     };
 
     handleLogout = (e) => {
@@ -115,10 +104,26 @@ class Main extends Component {
         });
     };
 
+    tipsOn = (e) => {
+        const currentEl = e.currentTarget;
+        currentEl.classList.add("tooltip");
+
+        const tooltipSpan = document.createElement("span");
+        tooltipSpan.classList.add("main_tooltip");
+        tooltipSpan.innerText = "Log in to enter";
+        currentEl.appendChild(tooltipSpan);
+    };
+
+    tipsOff = (e) => {
+        const currentEl = e.currentTarget;
+        currentEl.classList.remove("tooltip");
+
+        const toRemove = currentEl.querySelector(".main_tooltip");
+        currentEl.removeChild(toRemove);
+    };
+
     render() {
-        if(this.state.redirect) {
-            return <Redirect to={this.state.redirect} />
-        } else if((this.state.savedUser || this.state.greeting) && (this.state.validLogin && this.state.validPassword)) {
+        if((this.state.savedUser || this.state.greeting) && (this.state.validLogin && this.state.validPassword)) {
             return (
                 <div className="container transparent">
                     <div className="main">
@@ -135,10 +140,10 @@ class Main extends Component {
                         </div>
                         <div className="main_content greeting">
                             <h2>{"Hi " + this.state.greeting + "!"}</h2>
-                            <h2>What would you like to manage?</h2>
+                            <h4>What would you like to manage?</h4>
                             <div>
                                 <NavLink to="/users">
-                                    <button className={"btn_log btn_active"} onMouseEnter={this.handleActive}>
+                                    <button className={"btn_log btn_active"}>
                                         USERS
                                     </button>
                                 </NavLink>
@@ -161,11 +166,11 @@ class Main extends Component {
                             <NavLink to="/" className="active_nav">
                                 <div></div>
                             </NavLink>
-                            <NavLink to="/users">
-                                <div>USERS</div>
+                            <NavLink to="/">
+                                <div onMouseEnter={this.tipsOn} onMouseLeave={this.tipsOff}>USERS</div>
                             </NavLink>
-                            <NavLink to="/groups">
-                                <div>GROUPS</div>
+                            <NavLink to="/">
+                                <div onMouseEnter={this.tipsOn} onMouseLeave={this.tipsOff}>GROUPS</div>
                             </NavLink>
                         </div>
                         <form className="main_content logpanel">
@@ -178,12 +183,6 @@ class Main extends Component {
                                    value={this.state.password} id="password" onChange={this.handleChange}
                                    className={this.state.validPassword ? "" : "invalid"} />
                             <div>
-                                <label className={this.state.isChecked ? "remember" : ""}>
-                                    <input type="checkbox"
-                                           checked={this.state.isChecked}
-                                           onChange={this.toggleChange} />
-                                    Remember
-                                </label>
                                 <button className={"btn_log_small"} type="submit" onClick={this.handleLogin}>Log in</button>
                             </div>
                         </form>

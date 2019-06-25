@@ -6,6 +6,7 @@ import UsersEdit from './UsersEdit';
 class Users extends Component {
     state = {
         url: "http://localhost:3500",
+        savedUser: "",
         users: [],
         usersGroups: [],
         currUsers: [],
@@ -19,6 +20,16 @@ class Users extends Component {
         startNum: 1,
         nextStop: false
     };
+
+    componentDidMount() {
+        var savedUser = localStorage.getItem("savedUser");
+
+        if(savedUser) {
+            this.setState({
+                savedUser
+            });
+        }
+    }
 
     handleManage = (e) => {
         e.preventDefault();
@@ -261,7 +272,7 @@ class Users extends Component {
                     <div className="main">
                         <div className="navigation">
                             <NavLink to="/">
-                                <div>MAIN</div>
+                                <div>LOG</div>
                             </NavLink>
                             <NavLink to="/users" className="active_nav">
                                 <div>USERS</div>
@@ -294,7 +305,7 @@ class Users extends Component {
                     <div className="main">
                         <div className="navigation">
                             <NavLink to="/">
-                                <div>MAIN</div>
+                                <div>LOG</div>
                             </NavLink>
                             <NavLink to="/users" className="active_nav">
                                 <div>USERS</div>
@@ -327,7 +338,7 @@ class Users extends Component {
                     <div className="main">
                         <div className="navigation">
                             <NavLink to="/">
-                                <div>MAIN</div>
+                                <div>LOG</div>
                             </NavLink>
                             <NavLink to="/users" className="active_nav">
                                 <div>USERS</div>

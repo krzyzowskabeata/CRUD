@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {HashRouter, Route, Link, NavLink, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import Main from './Main';
 import Users from './Users';
 import Groups from './Groups';

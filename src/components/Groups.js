@@ -257,7 +257,7 @@ class Groups extends Component {
                     <div className="main">
                         <div className="navigation">
                             <NavLink to="/">
-                                <div>MAIN</div>
+                                <div>LOG</div>
                             </NavLink>
                             <NavLink to="/users">
                                 <div>USERS</div>
@@ -290,7 +290,7 @@ class Groups extends Component {
                     <div className="main">
                         <div className="navigation">
                             <NavLink to="/">
-                                <div>MAIN</div>
+                                <div>LOG</div>
                             </NavLink>
                             <NavLink to="/users">
                                 <div>USERS</div>
@@ -324,7 +324,7 @@ class Groups extends Component {
                     <div className="main">
                         <div className="navigation">
                             <NavLink to="/">
-                                <div>MAIN</div>
+                                <div>LOG</div>
                             </NavLink>
                             <NavLink to="/users">
                                 <div>USERS</div>

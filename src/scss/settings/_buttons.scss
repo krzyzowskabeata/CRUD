@@ -46,7 +46,7 @@
   font-size: 1em;
   font-weight: 700;
   color: #fff;
-  background-color: lighten($base-color, 10%);
+  background-color: transparent;
   border: transparent;
   border-radius: 50px;
   padding: 5px 15px;
@@ -55,7 +55,7 @@
 }
 
 .btn_log_small:hover {
-  background-color: transparent;
+  background-color: lighten($base-color, 10%);
 }
 
 // log panel end

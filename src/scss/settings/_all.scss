@@ -1,3 +1,16 @@
+@mixin tooltip-cast {
+  position: absolute;
+  top: 32px;
+  left: 5px;
+  width: 200px;
+  text-align: center;
+  color: #fff;
+  background-color: darken($base-color, 25%);
+  border-radius: 25px;
+  padding: 5px 10px;
+  z-index: 1;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -21,14 +34,12 @@
 }
 
 .tooltipText {
+  @include tooltip-cast;
+}
+
+.main_tooltipText {
+  @include tooltip-cast;
   position: absolute;
-  top: 32px;
-  left: 5px;
-  width: 200px;
-  text-align: center;
-  color: #fff;
-  background-color: darken($base-color, 25%);
-  border-radius: 25px;
-  padding: 5px 10px;
-  z-index: 1;
+  top: 38px;
+  right: -30px;
 }
