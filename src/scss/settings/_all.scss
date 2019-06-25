@@ -1,7 +1,4 @@
 @mixin tooltip-cast {
-  position: absolute;
-  top: 32px;
-  left: 5px;
   width: 200px;
   text-align: center;
   color: #fff;
@@ -35,6 +32,9 @@
 
 .tooltipText {
   @include tooltip-cast;
+  position: absolute;
+  top: 32px;
+  left: 5px;
 }
 
 .main_tooltipText {

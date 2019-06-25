@@ -109,7 +109,7 @@ class Main extends Component {
         currentEl.classList.add("tooltip");
 
         const tooltipSpan = document.createElement("span");
-        tooltipSpan.classList.add("main_tooltip");
+        tooltipSpan.classList.add("main_tooltipText");
         tooltipSpan.innerText = "Log in to enter";
         currentEl.appendChild(tooltipSpan);
     };
@@ -118,7 +118,7 @@ class Main extends Component {
         const currentEl = e.currentTarget;
         currentEl.classList.remove("tooltip");
 
-        const toRemove = currentEl.querySelector(".main_tooltip");
+        const toRemove = currentEl.querySelector(".main_tooltipText");
         currentEl.removeChild(toRemove);
     };
 
