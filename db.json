@@ -1,0 +1,92 @@
+{
+  "users": [
+    {
+      "guid": "bkrzyzowska",
+      "name": "Beata K",
+      "id": "1"
+    },
+    {
+      "guid": "ddobry",
+      "name": "Dominik D",
+      "id": "2"
+    }
+  ],
+  "groups": [
+    {
+      "name": "admin",
+      "description": "Lorem ipsum admin",
+      "id": "0001"
+    },
+    {
+      "name": "user",
+      "description": "Lorem ipsum user",
+      "id": "0002"
+    },
+    {
+      "name": "reader",
+      "description": "Lorem ipsum reader",
+      "id": "0003"
+    }
+  ],
+  "permissions": [
+    {
+      "name": "copy",
+      "description": "User able to copy",
+      "id": "00-01"
+    },
+    {
+      "name": "read",
+      "description": "User able to read",
+      "id": "00-02"
+    },
+    {
+      "name": "update",
+      "description": "User able to update",
+      "id": "00-03"
+    },
+    {
+      "name": "delete",
+      "description": "User able to delete",
+      "id": "00-04"
+    }
+  ],
+  "usersGroups": [
+    {
+      "userGuid": "bkrzyzowska",
+      "groupID": "0001",
+      "id": "1"
+    },
+    {
+      "userGuid": "ddobry",
+      "groupID": "0001",
+      "id": "2"
+    },
+    {
+      "userGuid": "ddobry",
+      "groupID": "0002",
+      "id": "3"
+    },
+    {
+      "userGuid": "ddobry",
+      "groupID": "0003",
+      "id": "4"
+    }
+  ],
+  "groupsPermissions": [
+    {
+      "groupID": "0002",
+      "permissionsId": "00-01",
+      "id": "0001"
+    },
+    {
+      "groupID": "0003",
+      "permissionsId": "00-02",
+      "id": "0002"
+    },
+    {
+      "groupID": "0003",
+      "permissionsId": "00-01",
+      "id": "muVdco7"
+    }
+  ]
+}

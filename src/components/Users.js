@@ -33,20 +33,33 @@ class Users extends Component {
             [e.target.name]: true
         });
 
-        if(e.target.name === "editBtn") {
+        if(e.target.name === "searchBtn") {
             this.setState({
-                editUser: [],
+                users: [],
+                usersGroups: [],
                 currUsers: [],
                 currGroups: [],
+                editUser: [],
             });
         }
 
-        if(e.target.name === "searchBtn") {
+        if(e.target.name === "addBtn") {
             this.setState({
-                // guidValid: true,
-                editUser: [],
+                users: [],
+                usersGroups: [],
                 currUsers: [],
                 currGroups: [],
+                editUser: [],
+            });
+        }
+
+        if(e.target.name === "editBtn") {
+            this.setState({
+                users: [],
+                usersGroups: [],
+                currUsers: [],
+                currGroups: [],
+                editUser: [],
             });
         }
     };

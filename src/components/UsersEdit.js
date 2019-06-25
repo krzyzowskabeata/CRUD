@@ -112,6 +112,13 @@ class UsersEdit extends Component {
             fetch(`${this.state.url}/users/${idDelete}`, {
                 method: 'DELETE'
             }).then(users => {
+                this.set.state({
+                    valid: false,
+                    validGuid: true,
+                    validName: true,
+                    validCheckboxes: true,
+                    validDelete: false
+                })
                 })
                 .catch(err => {
                     console.log(err);
