@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class UsersAdd extends Component {
     state = {
-        url: "http://localhost:3000",
+        url: "http://localhost:3500",
         groups: [],
         guid: "",
         name: "",
@@ -85,9 +85,27 @@ class UsersAdd extends Component {
                 currGroups
             });
         }
+
+        // additional guid unique check
+        fetch(`${this.state.url}/users?guid=${this.state.guid}`).then(el => el.json())
+            .then(users => {
+                if(users.length) {
+                    this.setState({
+                        valid: false,
+                        validGuid: false
+                    }, function() {
+                        this.handleRender();
+                    });
+                } else {
+                    this.handleRender();
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
-    render() {
+    handleRender = () => {
         if(this.state.valid) {
             // users
             const newUser = {
@@ -131,7 +149,9 @@ class UsersAdd extends Component {
                     .catch(err => console.log(err));
             });
         }
+    };
 
+    render() {
         return (
             <form className="users_add" onSubmit={this.handleSubmit}>
                 <label>

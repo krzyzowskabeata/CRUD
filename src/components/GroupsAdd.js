@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class GroupsAdd extends Component {
     state = {
-        url: "http://localhost:3000",
+        url: "http://localhost:3500",
         permissions: [],
         name: "",
         description: "",
@@ -78,9 +78,27 @@ class GroupsAdd extends Component {
                 currPerms
             });
         }
+
+        // additional name unique check
+        fetch(`${this.state.url}/groups?name=${this.state.name}`).then(el => el.json())
+            .then(groups => {
+                if(groups.length) {
+                    this.setState({
+                        valid: false,
+                        validName: false
+                    }, function() {
+                        this.handleRender();
+                    });
+                } else {
+                    this.handleRender();
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
-    render() {
+    handleRender = () => {
         if(this.state.valid) {
             // groups
             const newGroup = {
@@ -136,7 +154,10 @@ class GroupsAdd extends Component {
                 .catch(err => console.log(err));
         }
 
-        return (
+    };
+
+    render() {
+       return (
             <form className="groups_add" onSubmit={this.handleSubmit}>
                 <label>
                     Name

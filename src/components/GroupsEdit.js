@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 
 class Groups extends Component {
     state = {
-        url: "http://localhost:3000",
+        url: "http://localhost:3500",
         editGroup: this.props.editGroup,
         editGroupPermissions: this.props.editGroupPermissions,
         // editUserGroups: this.props.editUserGroups,
@@ -34,7 +34,7 @@ class Groups extends Component {
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
-            valid: true,
+            valid: false,
             validName: true,
             validDesc: true,
             validDelete: false
@@ -81,53 +81,27 @@ class Groups extends Component {
                 currPerms
             });
         }
+
+        // additional guid unique check
+        fetch(`${this.state.url}/groups?name=${this.state.name}`).then(el => el.json())
+            .then(groups => {
+                if(groups.length && !groups.filter(e => e.id === this.props.editGroup[0].id).length) {
+                    this.setState({
+                        valid: false,
+                        validName: false
+                    }, function() {
+                        this.handleRender();
+                    });
+                } else {
+                    this.handleRender();
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
-    handleDelete = (e) => {
-        e.preventDefault();
-
-        this.setState({
-            valid: false,
-            validName: true,
-            validDesc: true
-        });
-
-
-        if(e.target.name === "delete") {
-            const idDelete = this.state.editGroup[0].id;
-
-            // delete group
-            fetch(`${this.state.url}/groups/${idDelete}`, {
-                method: 'DELETE'
-            }).then(groups => {
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-
-            if(this.state.editGroupPermissions.length) {
-                // delete group's permissions
-                this.state.editGroup.forEach(e => {
-                    fetch(`${this.state.url}/groupsPermissions?groupID=${e.id}`).then(el => el.json())
-                        .then(groupsPermissions => {
-
-                            // groupsPermissions.id - delete
-                            groupsPermissions.forEach(el => {
-                                fetch(`${this.state.url}/groupsPermissions/${el.id}`, {
-                                    method: 'DELETE'
-                                }).then(res => res.json())
-                                    .catch(err => console.log(err));
-                            });
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
-                });
-            }
-        }
-    };
-
-    render() {
+    handleRender = () => {
         if(this.state.valid) {
             // groups
             const newGroup = {
@@ -197,19 +171,70 @@ class Groups extends Component {
                 });
             }
         }
+    };
+
+    handleDelete = (e) => {
+        e.preventDefault();
+
+        this.setState({
+            valid: false,
+            validName: true,
+            validDesc: true
+        });
+
+
+        if(e.target.name === "delete") {
+            const idDelete = this.state.editGroup[0].id;
+
+            // delete group
+            fetch(`${this.state.url}/groups/${idDelete}`, {
+                method: 'DELETE'
+            }).then(groups => {
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+            if(this.state.editGroupPermissions.length) {
+                // delete group's permissions
+                this.state.editGroup.forEach(e => {
+                    fetch(`${this.state.url}/groupsPermissions?groupID=${e.id}`).then(el => el.json())
+                        .then(groupsPermissions => {
+
+                            // groupsPermissions.id - delete
+                            groupsPermissions.forEach(el => {
+                                fetch(`${this.state.url}/groupsPermissions/${el.id}`, {
+                                    method: 'DELETE'
+                                }).then(res => res.json())
+                                    .catch(err => console.log(err));
+                            });
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                });
+            }
+        }
+    };
+
+    render() {
         return (
             <form className="groups_edit" onSubmit={this.handleSubmit}>
                 <label>
                     Name
                     <br/>
-                    <input type="text" name="name" className={this.state.validName ? "" : "not_valid"}
-                           placeholder={this.state.editGroup.length ? this.state.editGroup[0].name : ""} onChange={this.handleChange} />
+                    <input type="text" name="name"
+                           className={this.state.validName ? "" : "not_valid"}
+                           placeholder={this.state.editGroup.length ? this.state.editGroup[0].name : ""}
+                           onChange={this.handleChange} />
                 </label>
                 <label>
                     Description
                     <br/>
-                    <textarea name="description" rows="6" className={this.state.validDesc ? "" : "not_valid"}
-                              placeholder={this.state.editGroup.length ? this.state.editGroup[0].description : ""} onChange={this.handleChange}/>
+                    <textarea name="description" rows="6"
+                              className={this.state.validDesc ? "" : "not_valid"}
+                              placeholder={this.state.editGroup.length ? this.state.editGroup[0].description : ""}
+                              onChange={this.handleChange}/>
                 </label>
                 <label>
                     Permissions (not obligatory)

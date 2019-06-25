@@ -5,7 +5,7 @@ import UsersEdit from './UsersEdit';
 
 class Users extends Component {
     state = {
-        url: "http://localhost:3000",
+        url: "http://localhost:3500",
         users: [],
         usersGroups: [],
         currUsers: [],
@@ -106,9 +106,9 @@ class Users extends Component {
                     this.handleUsersGroups();
                 } else {
                     this.setState({
-                        usersGroups: [],
-                        currGroups: [],
-                        currUsers: [],
+                        // usersGroups: [],
+                        // currGroups: [],
+                        // currUsers: [],
                         page: this.state.page - 1,
                         startNum: this.state.startNum - 5,
                         nextStop: true
@@ -220,13 +220,11 @@ class Users extends Component {
                 this.handleUsers();
             });
         }
-
-        this.handleUsers();
     };
 
     handleSelect = (e) => {
-        const userId = e.target.parentElement.getAttribute("id");
 
+        const userId = e.currentTarget.getAttribute("id");
         const editUser = this.state.currUsers.filter(e => e.id === userId);
 
         this.setState({
@@ -391,7 +389,7 @@ class Users extends Component {
                                                                   id={el.description}
                                                                   onMouseOver={this.tipsOn} onMouseLeave={this.tipsOff}>
                                                                     {el.name + " "}
-                                                                </span>
+                                                            </span>
                                                         );
                                                     })}
                                                 </td>

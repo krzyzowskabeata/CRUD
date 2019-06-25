@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 
 class UsersEdit extends Component {
     state = {
-        url: "http://localhost:3000",
+        url: "http://localhost:3500",
         editUser: this.props.editUser,
         groups: [],
         guid: this.props.editUser[0].guid,
@@ -92,57 +92,27 @@ class UsersEdit extends Component {
                 currGroups
             });
         }
+
+        // additional guid unique check
+        fetch(`${this.state.url}/users?guid=${this.state.guid}`).then(el => el.json())
+            .then(users => {
+                if(users.length && !users.filter(e => e.id === this.props.editUser[0].id).length) {
+                    this.setState({
+                        valid: false,
+                        validGuid: false
+                    }, function() {
+                        this.handleRender();
+                    });
+                } else {
+                    this.handleRender();
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
-    handleDelete = (e) => {
-        e.preventDefault();
-
-        this.setState({
-            valid: false,
-            validGuid: true,
-            validName: true,
-            validCheckboxes: true
-        });
-
-
-        if(e.target.name === "delete") {
-            const idDelete = this.state.editUser[0].id;
-
-            // delete user
-            fetch(`${this.state.url}/users/${idDelete}`, {
-                method: 'DELETE'
-            }).then(users => {
-                this.set.state({
-                    valid: false,
-                    validGuid: true,
-                    validName: true,
-                    validCheckboxes: true,
-                    validDelete: false
-                })
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-
-            if(this.state.editUser[0].groups.length) {
-
-                // delete user's groups
-                this.state.editUser[0].groups.forEach(e => {
-                    const idGroupDelete = e.relId;
-
-                    fetch(`${this.state.url}/usersGroups/${idGroupDelete}`, {
-                        method: 'DELETE'
-                    }).then(users => {
-                        this.setState({
-                            validDelete: true
-                        });
-                    }).catch(err => console.log(err));
-                });
-            }
-        }
-    };
-
-    render() {
+    handleRender = () => {
         if(this.state.valid) {
             // users
             const newUser = {
@@ -170,7 +140,7 @@ class UsersEdit extends Component {
                     fetch(`${this.state.url}/usersGroups/${idGroupDelete}`, {
                         method: 'DELETE'
                     }).then(res => res.json())
-                    .catch(err => console.log(err));
+                        .catch(err => console.log(err));
                 });
             }
 
@@ -201,18 +171,72 @@ class UsersEdit extends Component {
                     .catch(err => console.log(err));
             });
         }
+    };
+
+    handleDelete = (e) => {
+        e.preventDefault();
+
+        this.setState({
+            valid: false,
+            validGuid: true,
+            validName: true,
+            validCheckboxes: true
+        });
+
+
+        if(e.target.name === "delete") {
+            const idDelete = this.state.editUser[0].id;
+
+            // delete user
+            fetch(`${this.state.url}/users/${idDelete}`, {
+                method: 'DELETE'
+            }).then(users => {
+                this.set.state({
+                    valid: false,
+                    validGuid: true,
+                    validName: true,
+                    validCheckboxes: true,
+                    validDelete: false
+                })
+            })
+                .catch(err => {
+                    console.log(err);
+                });
+
+            if(this.state.editUser[0].groups.length) {
+
+                // delete user's groups
+                this.state.editUser[0].groups.forEach(e => {
+                    const idGroupDelete = e.relId;
+
+                    fetch(`${this.state.url}/usersGroups/${idGroupDelete}`, {
+                        method: 'DELETE'
+                    }).then(users => {
+                        this.setState({
+                            validDelete: true
+                        });
+                    }).catch(err => console.log(err));
+                });
+            }
+        }
+    };
+
+    render() {
         return (
             <form className="users_edit" onSubmit={this.handleSubmit}>
                 <label>
                     Login
                     <br/>
-                    <input type="text" name="guid" placeholder={this.state.editUser.length ? this.state.editUser[0].guid : ""}
+                    <input type="text" name="guid"
+                           className={this.state.validGuid ? "" : "not_valid"}
+                           placeholder={this.state.editUser.length ? this.state.editUser[0].guid : ""}
                            onChange={this.handleChange} />
                 </label>
                 <label>
                     Name
                     <br/>
-                    <input type="text" name="name" placeholder={this.state.editUser.length ? this.state.editUser[0].name : ""}
+                    <input type="text" name="name"
+                           placeholder={this.state.editUser.length ? this.state.editUser[0].name : ""}
                            onChange={this.handleChange} />
                 </label>
                 <label>

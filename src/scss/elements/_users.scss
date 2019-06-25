@@ -111,6 +111,7 @@
 
   .table_users {
     width: 100%;
+    min-width: 600px;
 
     th {
       background-color: darken($base-color, 10%);

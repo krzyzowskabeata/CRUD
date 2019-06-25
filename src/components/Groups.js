@@ -5,10 +5,11 @@ import GroupsEdit from "./GroupsEdit";
 
 class Groups extends Component {
     state = {
-        url: "http://localhost:3000",
+        url: "http://localhost:3500",
         groups: [],
         groupsPermissions: [],
         permissions: [],
+        loginIdInit: "",
         nameId: "",
         currGroups: [],
         currGroupsPermissions: [],
@@ -16,8 +17,9 @@ class Groups extends Component {
         editGroupPermissions: [],
         nameValid: true,
         showTable: false,
-        fromIndex: 0,
-        toIndex: 6,
+        page: 1,
+        startNum: 1,
+        nextStop: false,
         addBtn: false,
         editBtn: false,
         searchBtn: false
@@ -38,6 +40,7 @@ class Groups extends Component {
 
         if(e.target.name === "editBtn") {
             this.setState({
+                nameValid: true,
                 editUser: [],
                 editUserGroups: []
             });
@@ -55,6 +58,7 @@ class Groups extends Component {
     handleChange = (e) => {
         this.setState({
             nameValid: true,
+            loginIdInit: e.target.value,
             nameId: e.target.value
         });
     };
@@ -66,35 +70,44 @@ class Groups extends Component {
             groups: [],
             groupsPermissions: [],
             permissions: [],
+            loginIdInit: "",
             currGroups: [],
             currGroupsPermissions: [],
             showTable: false,
-            fromIndex: 0,
-            toIndex: 6,
+            page: 1,
+            startNum: 1,
+            nextStop: false
         });
 
+        this.handleGroups();
+    };
+
+    handleGroups = () => {
+
         // groups.name
-        fetch(`${this.state.url}/groups?name=${this.state.nameId}`).then(el => el.json())
+        fetch(`${this.state.url}/groups?q=${this.state.nameId}&_page=${this.state.page}&_limit=5`).then(el => el.json())
             .then(groups => {
-                this.setState({
-                    groups
-                });
-
-                // groups.id
-                fetch(`${this.state.url}/groups?id=${this.state.nameId}`).then(el => el.json())
-                    .then(groups => {
-                        this.setState({
-                            groups: [...this.state.groups,...groups]
-                        });
-                        this.handleGroupsPermissions();
-                    })
-                    .catch(err => {
-                        console.log(err);
+                if(groups.length) {
+                    this.setState({
+                        groups,
+                        groupsPermissions: [],
+                        permissions: [],
+                        currGroups: [],
+                        currGroupsPermissions: [],
+                        nextStop: false
                     });
-
-                this.setState({
-                    nameId: ""
-                });
+                    this.handleGroupsPermissions();
+                } else {
+                    this.setState({
+                        // groupsPermissions: [],
+                        // permissions: [],
+                        // currGroups: [],
+                        // currGroupsPermissions: [],
+                        page: this.state.page - 1,
+                        startNum: this.state.startNum - 5,
+                        nextStop: true
+                    });
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -182,23 +195,27 @@ class Groups extends Component {
     handlePage = (e) => {
         e.preventDefault();
 
-        if(e.target.name === "prev" && this.state.fromIndex >= 6) {
+        if(e.target.name === "prev" && this.state.page > 1) {
             this.setState({
-                fromIndex: this.state.fromIndex - 6,
-                toIndex: this.state.toIndex - 6,
+                page: this.state.page - 1,
+                startNum: this.state.startNum - 5
+            }, function() {
+                this.handleGroups();
             });
         }
 
-        if(e.target.name === "next" && this.state.toIndex < this.state.currGroups.length) {
+        if(e.target.name === "next" ) {
             this.setState({
-                fromIndex: this.state.fromIndex + 6,
-                toIndex: this.state.toIndex + 6,
+                page: this.state.page + 1,
+                startNum: this.state.startNum + 5
+            }, function() {
+                this.handleGroups();
             });
         }
     };
 
     handleSelect = (e) => {
-        const groupId = e.target.parentElement.getAttribute("id");
+        const groupId = e.currentTarget.getAttribute("id");
 
         const editGroup = this.state.groups.filter(e => e.id === groupId);
         const editGroupPermissions = this.state.currGroupsPermissions.filter(e => e.groupID === editGroup.id);
@@ -334,18 +351,18 @@ class Groups extends Component {
                                     Group (name or id)
                                     <br/>
                                     <input type="text" name="name" onChange={this.handleChange}
-                                           value={this.state.nameId}
+                                           value={this.state.loginIdInit}
                                            className={this.state.nameValid ? "" : "not_valid"} />
                                 </label>
                                 <button type="submit" className="sub_btn">Search</button>
                             </form>
-                            <div className={this.state.currGroups.length > 6? "" : "hidden"}>
+                            <div className={this.state.currGroups.length ? "" : "hidden"}>
                                 <button name="prev" onClick={this.handlePage}
-                                        className={this.state.currGroups.length > 6 ? "prev_next_btn active" : "prev_next_btn"}>
+                                        className={this.state.page > 1 ? "prev_next_btn active" : "prev_next_btn"}>
                                     Prev
                                 </button>
                                 <button name="next" onClick={this.handlePage}
-                                        className={this.state.currGroups.length > 6 ? "prev_next_btn active" : "prev_next_btn"}>
+                                        className={!this.state.nextStop ? "prev_next_btn active" : "prev_next_btn"}>
                                     Next
                                 </button>
                             </div>
@@ -358,23 +375,21 @@ class Groups extends Component {
                                     <th>Permissions</th>
                                 </tr>
                                 {this.state.currGroups.map((e, index) => {
-                                    if(index >= this.state.fromIndex && index < this.state.toIndex) {
-                                        return (
-                                            <tr className="row" key={e.id} id={e.id} onClick={this.handleSelect}>
-                                                <td>{index + 1}</td>
-                                                <td>{e.name}</td>
-                                                <td>{e.description}</td>
-                                                <td>
-                                                    {e.permissions.map((el, index) => {
-                                                        return <span className="tooltip" key={index} id={el.description}
-                                                                     onMouseOver={this.tipsOn} onMouseLeave={this.tipsOff}>
+                                    return (
+                                        <tr className="row" key={e.id} id={e.id} onClick={this.handleSelect}>
+                                            <td>{index + this.state.startNum}</td>
+                                            <td>{e.name}</td>
+                                            <td>{e.description}</td>
+                                            <td>
+                                                {e.permissions.map((el, index) => {
+                                                    return <span className="tooltip" key={index} id={el.description}
+                                                                 onMouseOver={this.tipsOn} onMouseLeave={this.tipsOff}>
                                                             {el.name + " "}
                                                         </span>
-                                                    })}
-                                                </td>
-                                            </tr>
-                                        )
-                                    }
+                                                })}
+                                            </td>
+                                        </tr>
+                                    )
                                 })}
                                 </tbody>
                             </table>

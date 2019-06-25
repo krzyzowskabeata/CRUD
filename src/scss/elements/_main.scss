@@ -38,7 +38,6 @@
       height: 50px;
       width: 330px;
       background-color: #fff;
-      //margin-right: 10px;
     }
 
     &.active_nav {
@@ -50,3 +49,64 @@
     }
   }
 }
+
+@mixin custom-log {
+  font-size: 1em;
+  font-weight: 700;
+  border: transparent;
+  border-radius: 50px;
+  margin: 15px;
+}
+
+// login panel
+
+.logpanel, .greeting {
+  height: 100%;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 130px;
+
+  h2 {
+    margin: 10px;
+  }
+
+  input[type="name"],
+  input[type="password"] {
+    padding: 10px 20px;
+    @include custom-log;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  label {
+    color: lighten($base-color, 20%);
+    margin: 15px;
+    transition: color .2s ease-out;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .remember {
+    color: #fff;
+    margin: 15px;
+  }
+
+  .invalid {
+    background-color: $warn-color;
+    box-shadow: 0 0 0 1px #fff;
+
+    &::placeholder {
+      color: #fff;
+    }
+  }
+}
+
+// login panel end

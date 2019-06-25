@@ -1,14 +1,44 @@
 {
   "users": [
     {
-      "guid": "bkrzyzowska",
-      "name": "Beata K",
-      "id": "1"
+      "guid": "jkowalski",
+      "name": "Jan Kowalski",
+      "id": "Za59O0C"
     },
     {
-      "guid": "ddobry",
-      "name": "Dominik D",
-      "id": "2"
+      "guid": "anowak",
+      "name": "Anna Nowak",
+      "id": "0rjhU2j"
+    },
+    {
+      "guid": "bgaska",
+      "name": "Barbara Gaska",
+      "id": "uiJhqo0"
+    },
+    {
+      "guid": "knowak",
+      "name": "Katarzyna Nowak",
+      "id": "KsVv3Z_"
+    },
+    {
+      "guid": "ozab",
+      "name": "Olga Zab",
+      "id": "s3RfXjc"
+    },
+    {
+      "guid": "ikosa",
+      "name": "Iza Kosa",
+      "id": "BH1f4Rw"
+    },
+    {
+      "guid": "elis",
+      "name": "Ela Lis",
+      "id": "tpkb3tD"
+    },
+    {
+      "guid": "omaka",
+      "name": "Olga Maka",
+      "id": "ANryZWN"
     }
   ],
   "groups": [
@@ -26,6 +56,21 @@
       "name": "reader",
       "description": "Lorem ipsum reader",
       "id": "0003"
+    },
+    {
+      "name": "reader2",
+      "description": "Lorem ipsum reader",
+      "id": "00031"
+    },
+    {
+      "name": "reader3",
+      "description": "Lorem ipsum reader",
+      "id": "00035"
+    },
+    {
+      "name": "hola7",
+      "description": "hola7",
+      "id": "WMUnBfk"
     }
   ],
   "permissions": [
@@ -52,24 +97,74 @@
   ],
   "usersGroups": [
     {
-      "userGuid": "bkrzyzowska",
-      "groupID": "0001",
-      "id": "1"
-    },
-    {
-      "userGuid": "ddobry",
-      "groupID": "0001",
-      "id": "2"
-    },
-    {
-      "userGuid": "ddobry",
+      "userGuid": "ozab",
       "groupID": "0002",
-      "id": "3"
+      "id": "jKSXrHe"
     },
     {
-      "userGuid": "ddobry",
+      "userGuid": "omaka",
+      "groupID": "0001",
+      "id": "okxWDx2"
+    },
+    {
+      "userGuid": "ikosa",
+      "groupID": "0001",
+      "id": "7DjPL2i"
+    },
+    {
+      "userGuid": "knowak",
+      "groupID": "0001",
+      "id": "zS7ytc_"
+    },
+    {
+      "userGuid": "knowak",
+      "groupID": "0002",
+      "id": "8HjekMF"
+    },
+    {
+      "userGuid": "bgaska",
+      "groupID": "0001",
+      "id": "9vkuYQH"
+    },
+    {
+      "userGuid": "jkowalski",
+      "groupID": "0002",
+      "id": "CY0F_i3"
+    },
+    {
+      "userGuid": "jkowalski",
       "groupID": "0003",
-      "id": "4"
+      "id": "4esEIOB"
+    },
+    {
+      "userGuid": "jkowalski",
+      "groupID": "0001",
+      "id": "uSYWb_x"
+    },
+    {
+      "userGuid": "anowak",
+      "groupID": "0001",
+      "id": "GGVuzqB"
+    },
+    {
+      "userGuid": "anowak",
+      "groupID": "0003",
+      "id": "tcgtD24"
+    },
+    {
+      "userGuid": "anowak",
+      "groupID": "0002",
+      "id": "FUb3GuR"
+    },
+    {
+      "userGuid": "elis",
+      "groupID": "0001",
+      "id": "7ttg7db"
+    },
+    {
+      "userGuid": "elis",
+      "groupID": "0002",
+      "id": "jPZcqfX"
     }
   ],
   "groupsPermissions": [
@@ -87,6 +182,44 @@
       "groupID": "0003",
       "permissionsId": "00-01",
       "id": "muVdco7"
+    },
+    {
+      "groupID": "00031",
+      "permissionsId": "00-01",
+      "id": "mWdTTGc"
+    },
+    {
+      "groupID": "00031",
+      "permissionsId": "00-02",
+      "id": "NyYMzuM"
+    },
+    {
+      "groupID": "00033",
+      "permissionsId": "00-02",
+      "id": "lD73Qc0"
+    },
+    {
+      "groupID": "00035",
+      "permissionsId": "00-01",
+      "id": "Gwrw2kp"
+    },
+    {
+      "groupID": "00035",
+      "permissionsId": "00-02",
+      "id": "9nNGh6G"
+    },
+    {
+      "groupID": "WMUnBfk",
+      "permissionsId": "00-03",
+      "id": "P3xtCc9"
+    }
+  ],
+  "admins": [
+    {
+      "guid": "bkrzyzowska",
+      "name": "Beata",
+      "password": "1234",
+      "id": "1"
     }
   ]
 }
