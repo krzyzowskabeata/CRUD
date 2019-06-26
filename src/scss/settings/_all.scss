@@ -1,10 +1,8 @@
 @mixin tooltip-cast {
-  width: 200px;
   text-align: center;
   color: #fff;
   background-color: darken($base-color, 25%);
   border-radius: 25px;
-  padding: 5px 10px;
   z-index: 1;
 }
 
@@ -32,14 +30,18 @@
 
 .tooltipText {
   @include tooltip-cast;
+  width: 200px;
   position: absolute;
   top: 32px;
   left: 5px;
+  padding: 5px 10px;
 }
 
 .main_tooltipText {
   @include tooltip-cast;
+  width: 150px;
   position: absolute;
   top: 38px;
-  right: -30px;
+  right: 15px;
+  padding: 2px 5px;
 }
