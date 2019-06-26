@@ -215,7 +215,6 @@ class Groups extends Component {
         this.setState({
             editGroup,
             editGroupPermissions,
-            // editGroupId: this.state.usersGroups,
             editBtn: true,
             currGroups: []
         });
@@ -374,7 +373,14 @@ class Groups extends Component {
                                             <td>{e.name}</td>
                                             <td>{e.description}</td>
                                             <td>
-                                                {e.permissions.map((el, index) => {
+                                                {e.permissions.sort((a, b) => {
+                                                    if (a.name < b.name) {
+                                                    return -1;
+                                                    }
+                                                    if (a.name > b.name) {
+                                                        return 1;
+                                                    }
+                                                }).map((el, index) => {
                                                     return <span className="tooltip" key={index} id={el.description}
                                                                  onMouseOver={this.tipsOn} onMouseLeave={this.tipsOff}>
                                                             {el.name + " "}

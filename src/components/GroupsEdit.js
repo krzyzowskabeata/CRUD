@@ -4,7 +4,6 @@ class Groups extends Component {
     state = {
         url: "http://localhost:3500",
         editGroup: this.props.editGroup,
-        //editGroupPermissions: this.props.editGroupPermissions,
         permissions: [],
         currPerms: [],
         name: this.props.editGroup[0].name,

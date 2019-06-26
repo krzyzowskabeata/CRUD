@@ -11,16 +11,6 @@
       "id": "Dfy9FOZ"
     },
     {
-      "guid": "kkowalsa",
-      "name": "Kasia Kowalska",
-      "id": "l8Q7xhX"
-    },
-    {
-      "guid": "akostka",
-      "name": "Artur Kostka",
-      "id": "3HyIdHI"
-    },
-    {
       "guid": "ibak",
       "name": "Igor Bak",
       "id": "Ec0Pyit"
@@ -49,6 +39,11 @@
       "guid": "rdab",
       "name": "Robert Dab",
       "id": "M_YmL00"
+    },
+    {
+      "guid": "kkowalska",
+      "name": "Kasia Kowalska",
+      "id": "TFAuGwt"
     }
   ],
   "groups": [
@@ -97,21 +92,6 @@
       "id": "DucyG_o"
     },
     {
-      "userGuid": "jnowak",
-      "groupID": "0002",
-      "id": "-SlBVk7"
-    },
-    {
-      "userGuid": "kkowalsa",
-      "groupID": "0001",
-      "id": "8xw5F6o"
-    },
-    {
-      "userGuid": "akostka",
-      "groupID": "0003",
-      "id": "hHU9KC5"
-    },
-    {
       "userGuid": "ibak",
       "groupID": "0001",
       "id": "b4WiAju"
@@ -150,6 +130,26 @@
       "userGuid": "rdab",
       "groupID": "0001",
       "id": "xkPnf1Z"
+    },
+    {
+      "userGuid": "kkowalsa",
+      "groupID": "0002",
+      "id": "ex7_kvI"
+    },
+    {
+      "userGuid": "jnowak",
+      "groupID": "0001",
+      "id": "cHk8MDD"
+    },
+    {
+      "userGuid": "kkowalska",
+      "groupID": "0002",
+      "id": "6ANpdDh"
+    },
+    {
+      "userGuid": "kkowalska",
+      "groupID": "0003",
+      "id": "I0Du1vm"
     }
   ],
   "groupsPermissions": [
@@ -157,16 +157,6 @@
       "groupID": "0003",
       "permissionsId": "00-02",
       "id": 4
-    },
-    {
-      "groupID": "0002",
-      "permissionsId": "00-01",
-      "id": 5
-    },
-    {
-      "groupID": "0002",
-      "permissionsId": "00-02",
-      "id": 6
     },
     {
       "groupID": "0001",
@@ -182,6 +172,16 @@
       "groupID": "0001",
       "permissionsId": "00-02",
       "id": 12
+    },
+    {
+      "groupID": "0002",
+      "permissionsId": "00-02",
+      "id": 13
+    },
+    {
+      "groupID": "0002",
+      "permissionsId": "00-01",
+      "id": 14
     }
   ],
   "admins": [

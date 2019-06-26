@@ -47,7 +47,7 @@ class None extends Component {
                             </NavLink>
                         </div>
                         <div className="main_content greeting">
-                            <h2>{this.state.savedUser + ", something went wrong!"}</h2>
+                            <h2>{this.state.savedUser.split(" ")[0] + ", something went wrong!"}</h2>
                             <h4>What would you like to manage?</h4>
                             <div>
                                 <NavLink to="/users">

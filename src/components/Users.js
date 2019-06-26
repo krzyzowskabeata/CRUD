@@ -370,7 +370,14 @@ class Users extends Component {
                                                 <td>{e.guid}</td>
                                                 <td>{e.name}</td>
                                                 <td>
-                                                    {e.groups.map((el, index) => {
+                                                    {e.groups.sort((a, b) => {
+                                                        if (a.name < b.name) {
+                                                            return -1;
+                                                        }
+                                                        if (a.name > b.name) {
+                                                            return 1;
+                                                        }
+                                                    }).map((el, index) => {
                                                         return (
                                                             <span className="tooltip" key={index}
                                                                   id={el.description}

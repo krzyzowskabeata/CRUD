@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 class Main extends Component {
 
@@ -82,7 +82,7 @@ class Main extends Component {
 
             this.setState({
                 savedUser: this.state.admins[0].name,
-                greeting: this.state.admins[0].name
+                greeting: this.state.admins[0].name.split(" ")[0]
             });
         }
     };
