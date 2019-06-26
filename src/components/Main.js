@@ -22,7 +22,7 @@ class Main extends Component {
         if(savedUser) {
             this.setState({
                 savedUser,
-                greeting: savedUser,
+                greeting: savedUser.split(" ")[0],
             });
         }
     }
