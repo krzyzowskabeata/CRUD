@@ -17,6 +17,7 @@ class Groups extends Component {
         editGroupPermissions: [],
         nameValid: true,
         showTable: false,
+        results: true,
         page: 1,
         startNum: 1,
         nextStop: false,
@@ -31,28 +32,21 @@ class Groups extends Component {
         this.setState({
             addBtn: false,
             editBtn: false,
-            searchBtn: false
+            searchBtn: false,
+            groups: [],
+            groupsPermissions: [],
+            permissions: [],
+            loginIdInit: "",
+            nameId: "",
+            currGroups: [],
+            currGroupsPermissions: [],
+            editGroup: [],
+            results: true
         });
 
         this.setState({
             [e.target.name]: true
         });
-
-        if(e.target.name === "editBtn") {
-            this.setState({
-                nameValid: true,
-                editUser: [],
-                editUserGroups: []
-            });
-        }
-
-        if(e.target.name === "searchBtn") {
-            this.setState({
-                nameValid: true,
-                editUser: [],
-                editUserGroups: []
-            });
-        }
     };
 
     handleChange = (e) => {
@@ -99,10 +93,7 @@ class Groups extends Component {
                     this.handleGroupsPermissions();
                 } else {
                     this.setState({
-                        // groupsPermissions: [],
-                        // permissions: [],
-                        // currGroups: [],
-                        // currGroupsPermissions: [],
+                        results: false,
                         page: this.state.page - 1,
                         startNum: this.state.startNum - 5,
                         nextStop: true
@@ -169,7 +160,9 @@ class Groups extends Component {
                         if(el.permissionsId === elm.id) {
                             const perm = {
                                 name: elm.name,
-                                description: elm.description
+                                description: elm.description,
+                                permId: el.id,
+                                groupId: e.id
                             };
                             singleGroupPermissions.push(perm);
                         }
@@ -185,7 +178,6 @@ class Groups extends Component {
             };
             currGroups.push(currGroup);
         });
-
         this.setState({
             currGroups,
             showTable: true
@@ -217,7 +209,7 @@ class Groups extends Component {
     handleSelect = (e) => {
         const groupId = e.currentTarget.getAttribute("id");
 
-        const editGroup = this.state.groups.filter(e => e.id === groupId);
+        const editGroup = this.state.currGroups.filter(e => e.id === groupId);
         const editGroupPermissions = this.state.currGroupsPermissions.filter(e => e.groupID === editGroup.id);
 
         this.setState({
@@ -355,6 +347,7 @@ class Groups extends Component {
                                            className={this.state.nameValid ? "" : "not_valid"} />
                                 </label>
                                 <button type="submit" className="sub_btn">Search</button>
+                                {!this.state.results && !this.state.currGroups.length ? <h4 className="notfound">Try again!</h4> : ""}
                             </form>
                             <div className={this.state.currGroups.length ? "" : "hidden"}>
                                 <button name="prev" onClick={this.handlePage}

@@ -158,3 +158,9 @@
     display: none;
   }
 }
+
+.notfound {
+  @include edited_added_custom;
+  width: 90px;
+  color: $warn-color;
+}

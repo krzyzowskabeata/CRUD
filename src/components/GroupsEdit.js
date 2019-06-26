@@ -4,8 +4,7 @@ class Groups extends Component {
     state = {
         url: "http://localhost:3500",
         editGroup: this.props.editGroup,
-        editGroupPermissions: this.props.editGroupPermissions,
-        // editUserGroups: this.props.editUserGroups,
+        //editGroupPermissions: this.props.editGroupPermissions,
         permissions: [],
         currPerms: [],
         name: this.props.editGroup[0].name,
@@ -119,26 +118,15 @@ class Groups extends Component {
                 .catch(err => console.log(err));
 
             // groupsPermissions - delete previous
-            if(this.state.editGroupPermissions.length) {
-                this.state.editGroup.forEach(e => {
-
-                    // groupsPermissions.groupID
-                    fetch(`${this.state.url}/groupsPermissions?groupID=${e.id}`).then(el => el.json())
-                        .then(groupsPermissions => {
-
-                            // groupsPermissions.id - delete
-                            groupsPermissions.forEach(el => {
-                                fetch(`${this.state.url}/groupsPermissions/${el.id}`, {
-                                    method: 'DELETE'
-                                }).then(res => res.json())
-                                    .catch(err => console.log(err));
-                            });
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
+            if(this.state.editGroup[0].permissions.length) {
+                this.state.editGroup[0].permissions.forEach(e => {
+                    // groupsPermissions.id - delete
+                    fetch(`${this.state.url}/groupsPermissions/${e.permId}`, {
+                        method: 'DELETE'
+                    }).then(res => res.json())
+                        .catch(err => console.log(err));
                 });
-            }
+            };
 
             if(this.state.currPerms.length) {
 
@@ -194,25 +182,16 @@ class Groups extends Component {
                     console.log(err);
                 });
 
-            if(this.state.editGroupPermissions.length) {
-                // delete group's permissions
-                this.state.editGroup.forEach(e => {
-                    fetch(`${this.state.url}/groupsPermissions?groupID=${e.id}`).then(el => el.json())
-                        .then(groupsPermissions => {
-
-                            // groupsPermissions.id - delete
-                            groupsPermissions.forEach(el => {
-                                fetch(`${this.state.url}/groupsPermissions/${el.id}`, {
-                                    method: 'DELETE'
-                                }).then(res => res.json())
-                                    .catch(err => console.log(err));
-                            });
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
+            // groupsPermissions - delete previous
+            if(this.state.editGroup[0].permissions.length) {
+                this.state.editGroup[0].permissions.forEach(e => {
+                    // groupsPermissions.id - delete
+                    fetch(`${this.state.url}/groupsPermissions/${e.permId}`, {
+                        method: 'DELETE'
+                    }).then(res => res.json())
+                        .catch(err => console.log(err));
                 });
-            }
+            };
         }
     };
 
@@ -241,7 +220,7 @@ class Groups extends Component {
                 </label>
                 <div className="checkboxes">
                     {this.state.permissions.map(e => {
-                        if(this.state.editGroupPermissions.filter(el => el.name === e.name).length) {
+                        if(this.state.editGroup[0].permissions.filter(el => el.name === e.name).length) {
                             return (
                                 <label key={e.id} className="checked">
                                     <input type="checkbox" name={e.name} onClick={this.handleChoice} />

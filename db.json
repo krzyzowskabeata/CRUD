@@ -1,44 +1,54 @@
 {
   "users": [
     {
-      "guid": "jkowalski",
-      "name": "Jan Kowalski",
-      "id": "Za59O0C"
+      "guid": "akowalska",
+      "name": "Anna Kowalska",
+      "id": "S-5LqNq"
     },
     {
-      "guid": "anowak",
-      "name": "Anna Nowak",
-      "id": "0rjhU2j"
+      "guid": "jnowak",
+      "name": "Jola Nowak",
+      "id": "Dfy9FOZ"
     },
     {
-      "guid": "bgaska",
-      "name": "Barbara Gaska",
-      "id": "uiJhqo0"
+      "guid": "kkowalsa",
+      "name": "Kasia Kowalska",
+      "id": "l8Q7xhX"
     },
     {
-      "guid": "knowak",
-      "name": "Katarzyna Nowak",
-      "id": "KsVv3Z_"
+      "guid": "akostka",
+      "name": "Artur Kostka",
+      "id": "3HyIdHI"
     },
     {
-      "guid": "ozab",
-      "name": "Olga Zab",
-      "id": "s3RfXjc"
+      "guid": "ibak",
+      "name": "Igor Bak",
+      "id": "Ec0Pyit"
     },
     {
-      "guid": "ikosa",
-      "name": "Iza Kosa",
-      "id": "BH1f4Rw"
+      "guid": "enowak",
+      "name": "Eugeniusz Nowak",
+      "id": "JEp6YBS"
     },
     {
-      "guid": "elis",
-      "name": "Ela Lis",
-      "id": "tpkb3tD"
+      "guid": "onowak",
+      "name": "Olaf Nowak",
+      "id": "odzgrym"
     },
     {
-      "guid": "omaka",
-      "name": "Olga Maka",
-      "id": "ANryZWN"
+      "guid": "onowak02",
+      "name": "Olga Nowak",
+      "id": "qesHuYn"
+    },
+    {
+      "guid": "jmak",
+      "name": "Justyna Mak",
+      "id": "aI1tfx9"
+    },
+    {
+      "guid": "rdab",
+      "name": "Robert Dab",
+      "id": "M_YmL00"
     }
   ],
   "groups": [
@@ -56,21 +66,6 @@
       "name": "reader",
       "description": "Lorem ipsum reader",
       "id": "0003"
-    },
-    {
-      "name": "reader2",
-      "description": "Lorem ipsum reader",
-      "id": "00031"
-    },
-    {
-      "name": "reader3",
-      "description": "Lorem ipsum reader",
-      "id": "00035"
-    },
-    {
-      "name": "hola7",
-      "description": "hola7",
-      "id": "WMUnBfk"
     }
   ],
   "permissions": [
@@ -97,127 +92,102 @@
   ],
   "usersGroups": [
     {
-      "userGuid": "ozab",
+      "userGuid": "akowalska",
+      "groupID": "0001",
+      "id": "DucyG_o"
+    },
+    {
+      "userGuid": "jnowak",
       "groupID": "0002",
-      "id": "jKSXrHe"
+      "id": "-SlBVk7"
     },
     {
-      "userGuid": "omaka",
+      "userGuid": "kkowalsa",
       "groupID": "0001",
-      "id": "okxWDx2"
+      "id": "8xw5F6o"
     },
     {
-      "userGuid": "ikosa",
-      "groupID": "0001",
-      "id": "7DjPL2i"
-    },
-    {
-      "userGuid": "knowak",
-      "groupID": "0001",
-      "id": "zS7ytc_"
-    },
-    {
-      "userGuid": "knowak",
-      "groupID": "0002",
-      "id": "8HjekMF"
-    },
-    {
-      "userGuid": "bgaska",
-      "groupID": "0001",
-      "id": "9vkuYQH"
-    },
-    {
-      "userGuid": "jkowalski",
-      "groupID": "0002",
-      "id": "CY0F_i3"
-    },
-    {
-      "userGuid": "jkowalski",
+      "userGuid": "akostka",
       "groupID": "0003",
-      "id": "4esEIOB"
+      "id": "hHU9KC5"
     },
     {
-      "userGuid": "jkowalski",
+      "userGuid": "ibak",
       "groupID": "0001",
-      "id": "uSYWb_x"
+      "id": "b4WiAju"
     },
     {
-      "userGuid": "anowak",
-      "groupID": "0001",
-      "id": "GGVuzqB"
+      "userGuid": "ibak",
+      "groupID": "0002",
+      "id": "X9VYufe"
     },
     {
-      "userGuid": "anowak",
+      "userGuid": "ibak",
       "groupID": "0003",
-      "id": "tcgtD24"
+      "id": "cpPDt3y"
     },
     {
-      "userGuid": "anowak",
-      "groupID": "0002",
-      "id": "FUb3GuR"
-    },
-    {
-      "userGuid": "elis",
+      "userGuid": "enowak",
       "groupID": "0001",
-      "id": "7ttg7db"
+      "id": "OcvZqMz"
     },
     {
-      "userGuid": "elis",
+      "userGuid": "onowak",
       "groupID": "0002",
-      "id": "jPZcqfX"
+      "id": "lUz0PXY"
+    },
+    {
+      "userGuid": "onowak02",
+      "groupID": "0003",
+      "id": "6o-P2Zc"
+    },
+    {
+      "userGuid": "jmak",
+      "groupID": "0002",
+      "id": "V5yfUdu"
+    },
+    {
+      "userGuid": "rdab",
+      "groupID": "0001",
+      "id": "xkPnf1Z"
     }
   ],
   "groupsPermissions": [
     {
+      "groupID": "0003",
+      "permissionsId": "00-02",
+      "id": 4
+    },
+    {
       "groupID": "0002",
       "permissionsId": "00-01",
-      "id": "0001"
+      "id": 5
     },
     {
-      "groupID": "0003",
+      "groupID": "0002",
       "permissionsId": "00-02",
-      "id": "0002"
+      "id": 6
     },
     {
-      "groupID": "0003",
-      "permissionsId": "00-01",
-      "id": "muVdco7"
-    },
-    {
-      "groupID": "00031",
-      "permissionsId": "00-01",
-      "id": "mWdTTGc"
-    },
-    {
-      "groupID": "00031",
-      "permissionsId": "00-02",
-      "id": "NyYMzuM"
-    },
-    {
-      "groupID": "00033",
-      "permissionsId": "00-02",
-      "id": "lD73Qc0"
-    },
-    {
-      "groupID": "00035",
-      "permissionsId": "00-01",
-      "id": "Gwrw2kp"
-    },
-    {
-      "groupID": "00035",
-      "permissionsId": "00-02",
-      "id": "9nNGh6G"
-    },
-    {
-      "groupID": "WMUnBfk",
+      "groupID": "0001",
       "permissionsId": "00-03",
-      "id": "P3xtCc9"
+      "id": 10
+    },
+    {
+      "groupID": "0001",
+      "permissionsId": "00-01",
+      "id": 11
+    },
+    {
+      "groupID": "0001",
+      "permissionsId": "00-02",
+      "id": 12
     }
   ],
   "admins": [
     {
-      "guid": "bkrzyzowska",
-      "name": "Beata",
+      "guid": "bdylan",
+      "name": "Bob Dylan",
       "password": "1234",
       "id": "1"
     }

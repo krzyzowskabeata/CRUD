@@ -16,6 +16,7 @@ class Users extends Component {
         loginInit: "",
         loginName: "",
         showTable: false,
+        results: true,
         page: 1,
         startNum: 1,
         nextStop: false
@@ -37,42 +38,18 @@ class Users extends Component {
         this.setState({
             addBtn: false,
             editBtn: false,
-            searchBtn: false
+            searchBtn: false,
+            users: [],
+            usersGroups: [],
+            currUsers: [],
+            currGroups: [],
+            editUser: [],
+            results: true
         });
 
         this.setState({
             [e.target.name]: true
         });
-
-        if(e.target.name === "searchBtn") {
-            this.setState({
-                users: [],
-                usersGroups: [],
-                currUsers: [],
-                currGroups: [],
-                editUser: [],
-            });
-        }
-
-        if(e.target.name === "addBtn") {
-            this.setState({
-                users: [],
-                usersGroups: [],
-                currUsers: [],
-                currGroups: [],
-                editUser: [],
-            });
-        }
-
-        if(e.target.name === "editBtn") {
-            this.setState({
-                users: [],
-                usersGroups: [],
-                currUsers: [],
-                currGroups: [],
-                editUser: [],
-            });
-        }
     };
 
     handleChange = (e) => {
@@ -117,9 +94,7 @@ class Users extends Component {
                     this.handleUsersGroups();
                 } else {
                     this.setState({
-                        // usersGroups: [],
-                        // currGroups: [],
-                        // currUsers: [],
+                        results: false,
                         page: this.state.page - 1,
                         startNum: this.state.startNum - 5,
                         nextStop: true
@@ -368,6 +343,7 @@ class Users extends Component {
                                            className={this.state.guidValid ? "" : "not_valid"} />
                                 </label>
                                 <button type="submit" className="sub_btn">Search</button>
+                                {!this.state.results && !this.state.currUsers.length ? <h4 className="notfound">Try again!</h4> : ""}
                             </form>
                             <div className={this.state.currUsers.length ? "" : "hidden"}>
                                 <button name="prev" onClick={this.handlePage}

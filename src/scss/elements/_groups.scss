@@ -13,16 +13,6 @@
     }
   }
 
-  //.add_active {
-  //  color: darken($add-color, 10%);
-  //  background-color: lighten($base-color, 10%);
-  //}
-  //
-  //.edit_active {
-  //  color: darken($edit-color, 10%);
-  //  background-color: lighten($base-color, 10%);
-  //}
-
   .groups_add, .groups_edit {
     @include flex-align;
 
@@ -163,4 +153,10 @@
 .hidden {
     display: none;
   }
+}
+
+.notfound {
+  @include edited_added_custom;
+  width: 90px;
+  color: $warn-color;
 }
